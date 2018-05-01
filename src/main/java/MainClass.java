@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 public class MainClass  extends Application {
     public static void main(String[] args) {
         launch(args);
+        System.out.println("KovalenkoVyacheslav");
     }
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/FXML_MainForm.fxml"));
