@@ -9,5 +9,8 @@
         <module name="ChannelCompare" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ChannelCompare" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>
