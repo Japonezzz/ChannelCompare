@@ -40,11 +40,11 @@ public class ForMapper {
       .asObject(SearchChannel.class);
 
       for (int i = 0; i < response.getBody().items.length; i++) {
-          System.out.println("title: " + response.getBody().items[i].snippet.title);
-          System.out.println("data sozdanija: " + response.getBody().items[i].snippet.publishedAt);
-          System.out.println("sub count: " + response.getBody().items[i].statistics.subscriberCount);
-          System.out.println("video count: " + response.getBody().items[i].statistics.videoCount);
-          System.out.println("view count: " + response.getBody().items[i].statistics.viewCount);
+          System.out.println("Название: " + response.getBody().items[i].snippet.title);
+          System.out.println("Дата создания: " + response.getBody().items[i].snippet.publishedAt);
+          System.out.println("Количество подписчиков: " + response.getBody().items[i].statistics.subscriberCount);
+          System.out.println("Количество видео: " + response.getBody().items[i].statistics.videoCount);
+          System.out.println("Количество просмотров: " + response.getBody().items[i].statistics.viewCount);
 
           System.out.println("------------------------------------");
       }
@@ -64,17 +64,17 @@ public class ForMapper {
                 .asObject(SearchChannel.class);
 
         for (int i = 0; i < response.getBody().items.length; i++) {
-            System.out.println("title: " + response.getBody().items[i].snippet.title);
-            System.out.println("data sozdanija: " + response.getBody().items[i].snippet.publishedAt);
-            System.out.println("sub count: " + response.getBody().items[i].statistics.subscriberCount);
-            System.out.println("video count: " + response.getBody().items[i].statistics.videoCount);
-            System.out.println("view count: " + response.getBody().items[i].statistics.viewCount);
+            System.out.println("Название: " + response.getBody().items[i].snippet.title);
+            System.out.println("Дата создания: " + response.getBody().items[i].snippet.publishedAt);
+            System.out.println("Количество подписчиков: " + response.getBody().items[i].statistics.subscriberCount);
+            System.out.println("Количество видео: " + response.getBody().items[i].statistics.videoCount);
+            System.out.println("Количество просмотров: " + response.getBody().items[i].statistics.viewCount);
             System.out.println("------------------------------------");
             System.out.println("title: " + response1.getBody().items[i].snippet.title);
-            System.out.println("data sozdanija: " + response1.getBody().items[i].snippet.publishedAt);
-            System.out.println("sub count: " + response1.getBody().items[i].statistics.subscriberCount);
-            System.out.println("video count: " + response1.getBody().items[i].statistics.videoCount);
-            System.out.println("view count: " + response1.getBody().items[i].statistics.viewCount);
+            System.out.println("Дата создания: " + response1.getBody().items[i].snippet.publishedAt);
+            System.out.println("Количество подписчиков: " + response1.getBody().items[i].statistics.subscriberCount);
+            System.out.println("Количество видео: " + response1.getBody().items[i].statistics.videoCount);
+            System.out.println("Количество просмотров: " + response1.getBody().items[i].statistics.viewCount);
         }
     }
 
@@ -111,12 +111,53 @@ public class ForMapper {
       }
 
         for(SearchChannel a : channels) {
-            System.out.println("title: " + a.items[0].snippet.title);
-            System.out.println("data sozdanija: " + a.items[0].snippet.publishedAt);
-            System.out.println("sub count: " + a.items[0].statistics.subscriberCount);
-            System.out.println("video count: " + a.items[0].statistics.videoCount);
-            System.out.println("view count: " + a.items[0].statistics.viewCount);
+            System.out.println("Название: " + a.items[0].snippet.title);
+            System.out.println("Дата создания: " + a.items[0].snippet.publishedAt);
+            System.out.println("Количество подписчиков: " + a.items[0].statistics.subscriberCount);
+            System.out.println("Количество видео: " + a.items[0].statistics.videoCount);
+            System.out.println("Количество просмотров: " + a.items[0].statistics.viewCount);
             System.out.println("------------------------------------");
         }
     }
+
+    public static void mediaRezonans (String ChannelID) throws UnirestException {
+        HttpResponse<String> response = Unirest.get("https://www.googleapis.com/youtube/v3/channels")
+                .queryString("key", APIkey)
+                .queryString("part", "snippet,contentDetails,statistics")
+                .queryString("id", ChannelID)
+                .asString();//(SearchChannel.class);
+        System.out.println(response.getBody());
+
+
+
+//        for (int i = 0; i < response.getBody().items.length; i++) {
+//            System.out.println("Название: " + response.getBody().items[i].snippet.title);
+//            System.out.println("Дата создания: " + response.getBody().items[i].snippet.publishedAt);
+//            System.out.println("Количество подписчиков: " + response.getBody().items[i].statistics.subscriberCount);
+//            System.out.println("Количество видео: " + response.getBody().items[i].statistics.videoCount);
+//            System.out.println("Количество просмотров: " + response.getBody().items[i].statistics.viewCount);
+//            System.out.println("Количество комментариев: " + response.getBody().items[i].statistics.commentCount);
+//
+//            System.out.println("------------------------------------");
+//        }
+    }
+
+    public static void compareMediarezonans (String ChannelID, String ChannelID1) throws UnirestException {
+        HttpResponse<SearchChannel> response = Unirest.get("https://www.googleapis.com/youtube/v3/channels")
+                .queryString("key", APIkey)
+                .queryString("part", "snippet,statistics")
+                .queryString("id", ChannelID)
+                .asObject(SearchChannel.class);
+
+        for (int i = 0; i < response.getBody().items.length; i++) {
+            System.out.println("Название: " + response.getBody().items[i].snippet.title);
+            System.out.println("Дата создания: " + response.getBody().items[i].snippet.publishedAt);
+            System.out.println("Количество подписчиков: " + response.getBody().items[i].statistics.subscriberCount);
+            System.out.println("Количество видео: " + response.getBody().items[i].statistics.videoCount);
+            System.out.println("Количество просмотров: " + response.getBody().items[i].statistics.viewCount);
+            System.out.println("Количество комментариев: " + response.getBody().items[i].statistics.commentCount);
+
+            System.out.println("------------------------------------");
+        }
+}
 }
