@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 public class SearchChannel {
     public Item <Snippet, Statistics> [] items;
+    public int commentCount;
 
     public static Comparator<SearchChannel> NameComparator = new Comparator<SearchChannel>() {
 
@@ -68,5 +69,17 @@ public class SearchChannel {
 
             //descending order
             //return channeltitle2.compareTo(channeltitle1);
+        }};
+
+    public static Comparator<SearchChannel> CommentComparator = new Comparator<SearchChannel>() {
+
+        public int compare(SearchChannel s1, SearchChannel s2) {
+            Integer comments1 = s1.commentCount;
+            Integer comments2 = s2.commentCount;
+            //ascending order
+            //return comments1.compareTo(comments2);
+
+            //descending order
+            return comments2.compareTo(comments1);
         }};
 }
