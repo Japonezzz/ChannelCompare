@@ -1,5 +1,6 @@
 package Functionality.controller;
 
+import Functionality.enums.SortKey;
 import Functionality.model.SearchChannel;
 import com.alibaba.fastjson.JSON;
 import com.mashape.unirest.http.HttpResponse;
@@ -8,6 +9,7 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ForMapper {
 
@@ -76,7 +78,7 @@ public class ForMapper {
         }
     }
 
-    public static void Sorting (String [] ChannelID, String sortParameter) throws UnirestException {
+    public static void Sorting (String [] ChannelID, SortKey key) throws UnirestException {
         ArrayList<SearchChannel> channels = new ArrayList<SearchChannel>();
         for(int j=0; j<ChannelID.length;j++) {
           HttpResponse<SearchChannel> response = Unirest.get("https://www.googleapis.com/youtube/v3/channels")
@@ -87,8 +89,34 @@ public class ForMapper {
           channels.add(response.getBody());
       }
 
-      //channels.sort();
+      switch (key) {
+          case NAME:
+              Collections.sort(channels, SearchChannel.NameComparator);
+              break;
+          case DATE:
+              Collections.sort(channels, SearchChannel.DateComparator);
+              break;
+          case SUBSCRIBERS:
+              Collections.sort(channels, SearchChannel.SubsComparator);
+              break;
+          case VIDEOS:
+              Collections.sort(channels, SearchChannel.VideosComparator);
+              break;
+          case VIEWS:
+              Collections.sort(channels, SearchChannel.ViewsComparator);
+              break;
+              default:
+                  System.out.println("Error !");
+                  return;
+      }
 
-
+        for(SearchChannel a : channels) {
+            System.out.println("title: " + a.items[0].snippet.title);
+            System.out.println("data sozdanija: " + a.items[0].snippet.publishedAt);
+            System.out.println("sub count: " + a.items[0].statistics.subscriberCount);
+            System.out.println("video count: " + a.items[0].statistics.videoCount);
+            System.out.println("view count: " + a.items[0].statistics.viewCount);
+            System.out.println("------------------------------------");
+        }
     }
 }
