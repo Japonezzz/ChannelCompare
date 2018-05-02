@@ -1,9 +1,7 @@
-package CommentInfo.model;
+package CommentInfo.model.CommentModel;
 
-
-public class SearchComment {
-    public Item<Id>[] items;
-    public String nextPageToken;
+public class SearchCountComment {
+    public Item<Statistics>[] items;
 
 //    public static Comparator<SearchCountComment> NameComparator = new Comparator<SearchCountComment>() {
 //
