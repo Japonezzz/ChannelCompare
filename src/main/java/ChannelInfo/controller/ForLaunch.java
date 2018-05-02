@@ -1,6 +1,6 @@
-package Functionality.controller;
+package ChannelInfo.controller;
 
-import Functionality.enums.SortKey;
+import ChannelInfo.enums.SortKey;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 public class ForLaunch {

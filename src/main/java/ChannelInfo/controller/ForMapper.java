@@ -1,7 +1,7 @@
-package Functionality.controller;
+package ChannelInfo.controller;
 
-import Functionality.enums.SortKey;
-import Functionality.model.SearchChannel;
+import ChannelInfo.enums.SortKey;
+import ChannelInfo.model.SearchChannel;
 import com.alibaba.fastjson.JSON;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.ObjectMapper;

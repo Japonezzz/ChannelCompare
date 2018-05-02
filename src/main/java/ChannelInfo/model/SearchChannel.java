@@ -1,4 +1,4 @@
-package Functionality.model;
+package ChannelInfo.model;
 
 import java.util.Comparator;
 
