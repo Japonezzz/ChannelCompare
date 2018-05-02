@@ -1,4 +1,4 @@
-package Functionality.model;
+package ChannelInfo.model;
 
 public class  Item <T, V> {
     public T snippet;
