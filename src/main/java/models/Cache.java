@@ -122,7 +122,7 @@ public class Cache {
      * @param <Item>
      * @param map Карта с данными
      */
-    public void addAll(Map<Key, Item map) {
+    public void addAll(Map<Key, Item> map) {
         for (Map.Entry<Key, Item> entry : map.entrySet()) {
             put(entry.getKey(), entry.getValue());
         }

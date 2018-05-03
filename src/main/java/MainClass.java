@@ -10,7 +10,7 @@ public class MainClass  extends Application {
     }
 
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXML_MainForm.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/FXML_MainForm.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("ChannelCompare");
