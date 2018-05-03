@@ -3,12 +3,14 @@ package ChannelInfo.controller;
 import ChannelInfo.enums.SortKey;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
+import java.util.concurrent.ExecutionException;
+
 public class ForLaunch {
 
-    public static void main(String[] args) throws UnirestException {
+    public static void main(String[] args) throws UnirestException, ExecutionException, InterruptedException {
         //ForMapper.searchChannel("UCe4qOizEHWkk2N9m3CyfI4Q");
         //ForMapper.compareChannel("UC2-3h_JwOe0TUNc7fYqRBog", "UCe4qOizEHWkk2N9m3CyfI4Q");
-        String[] id = {"UC2-3h_JwOe0TUNc7fYqRBog", "UCe4qOizEHWkk2N9m3CyfI4Q"};
+        //String[] id = {"UC2-3h_JwOe0TUNc7fYqRBog", "UCe4qOizEHWkk2N9m3CyfI4Q"};
         //ForMapper.Sorting(id, SortKey.SUBSCRIBERS);
 
         //ForMapper.GetCommentCount("UC2-3h_JwOe0TUNc7fYqRBog");
@@ -18,6 +20,6 @@ public class ForLaunch {
         //ForMapper.SearchChannelComment("UC2-3h_JwOe0TUNc7fYqRBog");
         //ForMapper.compareChannelComment("UC2-3h_JwOe0TUNc7fYqRBog", "UCe4qOizEHWkk2N9m3CyfI4Q");
 
-        ForMapper.SortingWithComment(id, SortKey.COMMENTS);
+        //ForMapper.SortingWithComment(id, SortKey.COMMENTS);
     }
 }

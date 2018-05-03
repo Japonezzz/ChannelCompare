@@ -11,10 +11,12 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 import java.util.*;
+import java.util.concurrent.*;
 
 public class ForMapper {
 
   public final static ObjectMapper mapper;
+  public static ExecutorService executorService;
 
   static
   {
@@ -51,36 +53,46 @@ public class ForMapper {
       }
   }
 
-    public static void compareChannel (String ChannelID, String ChannelID1) throws UnirestException {
-        HttpResponse<SearchChannel> response = Unirest.get("https://www.googleapis.com/youtube/v3/channels")
-                .queryString("key", APIkey)
-                .queryString("part", "snippet,statistics")
-                .queryString("id", ChannelID)
-                .asObject(SearchChannel.class);
+  public static Callable<SearchChannel> GetResponse (String id)
+  {
+      Callable<SearchChannel> response =() -> {
+          HttpResponse<SearchChannel> r = Unirest.get("https://www.googleapis.com/youtube/v3/channels")
+                  .queryString("key", APIkey)
+                  .queryString("part", "snippet,statistics")
+                  .queryString("id", id)
+                  .asObject(SearchChannel.class);
+          return r.getBody();
+      };
+      return response;
+  }
 
-        HttpResponse<SearchChannel> response1 = Unirest.get("https://www.googleapis.com/youtube/v3/channels")
-                .queryString("key", APIkey)
-                .queryString("part", "snippet,statistics")
-                .queryString("id", ChannelID1)
-                .asObject(SearchChannel.class);
 
-        for (int i = 0; i < response.getBody().items.length; i++) {
-            System.out.println("Название: " + response.getBody().items[i].snippet.title);
-            System.out.println("Дата создания: " + response.getBody().items[i].snippet.publishedAt);
-            System.out.println("Количество подписчиков: " + response.getBody().items[i].statistics.subscriberCount);
-            System.out.println("Количество видео: " + response.getBody().items[i].statistics.videoCount);
-            System.out.println("Количество просмотров: " + response.getBody().items[i].statistics.viewCount);
+    public static void compareChannel (String ChannelID, String ChannelID1) throws UnirestException, ExecutionException, InterruptedException {
+
+        executorService = Executors.newFixedThreadPool(2);
+        Future<SearchChannel> future = executorService.submit(GetResponse(ChannelID));
+        Future<SearchChannel> future1 = executorService.submit(GetResponse(ChannelID1));
+
+        for (int i = 0; i < future.get().items.length; i++) {
+            System.out.println("Название: " + future.get().items[i].snippet.title);
+            System.out.println("Дата создания: " + future.get().items[i].snippet.publishedAt);
+            System.out.println("Количество подписчиков: " + future.get().items[i].statistics.subscriberCount);
+            System.out.println("Количество видео: " + future.get().items[i].statistics.videoCount);
+            System.out.println("Количество просмотров: " + future.get().items[i].statistics.viewCount);
             System.out.println("------------------------------------");
-            System.out.println("Название: " + response1.getBody().items[i].snippet.title);
-            System.out.println("Дата создания: " + response1.getBody().items[i].snippet.publishedAt);
-            System.out.println("Количество подписчиков: " + response1.getBody().items[i].statistics.subscriberCount);
-            System.out.println("Количество видео: " + response1.getBody().items[i].statistics.videoCount);
-            System.out.println("Количество просмотров: " + response1.getBody().items[i].statistics.viewCount);
+            System.out.println("Название: " + future1.get().items[i].snippet.title);
+            System.out.println("Дата создания: " + future1.get().items[i].snippet.publishedAt);
+            System.out.println("Количество подписчиков: " + future1.get().items[i].statistics.subscriberCount);
+            System.out.println("Количество видео: " + future1.get().items[i].statistics.videoCount);
+            System.out.println("Количество просмотров: " + future1.get().items[i].statistics.viewCount);
         }
+        executorService.shutdown();
     }
 
     public static void Sorting (String [] ChannelID, SortKey key) throws UnirestException {
-        ArrayList<SearchChannel> channels = new ArrayList<SearchChannel>();
+
+      ArrayList<SearchChannel> channels = new ArrayList<SearchChannel>();
+
         for(int j=0; j<ChannelID.length;j++) {
           HttpResponse<SearchChannel> response = Unirest.get("https://www.googleapis.com/youtube/v3/channels")
                   .queryString("key", APIkey)
