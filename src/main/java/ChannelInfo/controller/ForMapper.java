@@ -133,6 +133,36 @@ public class ForMapper {
         }
     }
 
+    public static Callable<SearchComment> GetResponseSearch (String ChannelID, String token)
+    {
+        Callable<SearchComment> response =() -> {
+            HttpResponse<SearchComment> r = Unirest.get("https://www.googleapis.com/youtube/v3/search")
+                    .queryString("key", APIkey)
+                    .queryString("part", "snippet")
+                    .queryString("maxResults", 50)
+                    .queryString("channelId", ChannelID)
+                    .queryString("pageToken", token)
+                    .asObject(SearchComment.class);
+            return r.getBody();
+        };
+        return response;
+    }
+
+    public static Callable<SearchComment> GetResponseSearchTest (String ChannelID, String token)
+    {
+        Callable<SearchComment> response =() -> {
+            HttpResponse<SearchComment> r = Unirest.get("https://www.googleapis.com/youtube/v3/search")
+                    .queryString("key", APIkey)
+                    .queryString("part", "snippet")
+                    .queryString("maxResults", 50)
+                    .queryString("channelId", ChannelID)
+                    .queryString("pageToken", token)
+                    .asObject(SearchComment.class);
+            return r.getBody();
+        };
+        return response;
+    }
+
 
     public static int GetCommentCount (String ChannelID) throws UnirestException, ExecutionException, InterruptedException {
 
@@ -148,17 +178,14 @@ public class ForMapper {
         String nextToken = response.getBody().nextPageToken;
 
         while (nextToken != null) {
+            final String x;
+            x=nextToken;
+            executorService = Executors.newFixedThreadPool(10);
+            Future<SearchComment> future = executorService.submit(GetResponseSearch(ChannelID, x));
+            executorService.shutdown();
 
-            HttpResponse<SearchComment> response1 = Unirest.get("https://www.googleapis.com/youtube/v3/search")
-                    .queryString("key", APIkey)
-                    .queryString("part", "snippet")
-                    .queryString("maxResults", 50)
-                    .queryString("channelId", ChannelID)
-                    .queryString("pageToken", nextToken)
-                    .asObject(SearchComment.class);
-
-            totalCommentCount += GetCountComment(response1.getBody());
-            nextToken = response1.getBody().nextPageToken;
+            totalCommentCount += GetCountComment(future.get());
+            nextToken = future.get().nextPageToken;
         }
 
         long finish = System.currentTimeMillis()/1000;
