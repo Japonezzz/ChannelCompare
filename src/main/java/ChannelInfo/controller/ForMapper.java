@@ -148,21 +148,6 @@ public class ForMapper {
         return response;
     }
 
-    public static Callable<SearchComment> GetResponseSearchTest (String ChannelID, String token)
-    {
-        Callable<SearchComment> response =() -> {
-            HttpResponse<SearchComment> r = Unirest.get("https://www.googleapis.com/youtube/v3/search")
-                    .queryString("key", APIkey)
-                    .queryString("part", "snippet")
-                    .queryString("maxResults", 50)
-                    .queryString("channelId", ChannelID)
-                    .queryString("pageToken", token)
-                    .asObject(SearchComment.class);
-            return r.getBody();
-        };
-        return response;
-    }
-
 
     public static int GetCommentCount (String ChannelID) throws UnirestException, ExecutionException, InterruptedException {
 

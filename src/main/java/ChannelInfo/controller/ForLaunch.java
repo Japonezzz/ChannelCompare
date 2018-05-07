@@ -18,7 +18,7 @@ public class ForLaunch {
         // String[] id = {"UC2-3h_JwOe0TUNc7fYqRBog", "UCe4qOizEHWkk2N9m3CyfI4Q"};
 
         //ForMapper.SearchChannelComment("UCe4qOizEHWkk2N9m3CyfI4Q");
-        ForMapper.compareChannelComment("UC2-3h_JwOe0TUNc7fYqRBog", "UCe4qOizEHWkk2N9m3CyfI4Q");
-        //ForMapper.SortingWithComment(id);
+        //ForMapper.compareChannelComment("UC2-3h_JwOe0TUNc7fYqRBog", "UCe4qOizEHWkk2N9m3CyfI4Q");
+        ForMapper.SortingWithComment(id);
     }
 }
