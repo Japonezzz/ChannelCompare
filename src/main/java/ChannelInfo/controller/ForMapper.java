@@ -15,26 +15,31 @@ import java.util.concurrent.*;
 
 public class ForMapper {
 
-  public final static ObjectMapper mapper;
-  public static ExecutorService executorService;
+    public final static ObjectMapper mapper;
+    public static ExecutorService executorService;
 
-  static
-  {
-      mapper = new ObjectMapper() {
+    static
+    {
+        mapper = new ObjectMapper() {
 
-      public <T> T readValue(String s, Class<T> aClass) {
-          return JSON.parseObject(s, aClass);
-      }
+            public <T> T readValue(String s, Class<T> aClass) {
+                return JSON.parseObject(s, aClass);
+            }
 
-      public String writeValue(Object o) {
-          return JSON.toJSONString(o);
-      }
-  };
-      Unirest.setObjectMapper(mapper);
-  }
+            public String writeValue(Object o) {
+                return JSON.toJSONString(o);
+            }
+        };
+        Unirest.setObjectMapper(mapper);
+    }
 
-  private static final String APIkey = "AIzaSyDCprAXgnUduPxnUIUtrBAj3P2y4G261EQ";
+    private static final String APIkey = "AIzaSyDCprAXgnUduPxnUIUtrBAj3P2y4G261EQ";
 
+    /**
+     *  Ф-ція для повернення інформації про канал по запиту
+     * @param id - ідентифікатор каналу
+     * @return - інформація про канал(назва, дата створення, ...
+     */
     public static Callable<SearchChannel> GetResponseChannel (String id)
     {
         Callable<SearchChannel> response =() -> {
@@ -49,25 +54,36 @@ public class ForMapper {
     }
 
 
-  public static void searchChannel (String ChannelID) throws ExecutionException, InterruptedException {
-      executorService = Executors.newFixedThreadPool(1);
-      Future<SearchChannel> future = executorService.submit(GetResponseChannel(ChannelID));
-      executorService.shutdown();
+    /**
+     *  Ф-ція для виведення інформації про канал по запиту
+     * @param ChannelID - ідентифікатор каналу
+     * @return - інформація про канал(назва, дата створення, ...
+     */
+    public static void searchChannel (String ChannelID) throws ExecutionException, InterruptedException {
+        executorService = Executors.newFixedThreadPool(1);
+        Future<SearchChannel> future = executorService.submit(GetResponseChannel(ChannelID));
+        executorService.shutdown();
 
-      for (int i = 0; i < future.get().items.length; i++) {
-          System.out.println("Название: " + future.get().items[i].snippet.title);
-          System.out.println("Дата создания: " + future.get().items[i].snippet.publishedAt);
-          System.out.println("Количество подписчиков: " + future.get().items[i].statistics.subscriberCount);
-          System.out.println("Количество видео: " + future.get().items[i].statistics.videoCount);
-          System.out.println("Количество просмотров: " + future.get().items[i].statistics.viewCount);
-          System.out.println("------------------------------------");
-      }
+        for (int i = 0; i < future.get().items.length; i++) {
+            System.out.println("Название: " + future.get().items[i].snippet.title);
+            System.out.println("Дата создания: " + future.get().items[i].snippet.publishedAt);
+            System.out.println("Количество подписчиков: " + future.get().items[i].statistics.subscriberCount);
+            System.out.println("Количество видео: " + future.get().items[i].statistics.videoCount);
+            System.out.println("Количество просмотров: " + future.get().items[i].statistics.viewCount);
+            System.out.println("------------------------------------");
+        }
 
-  }
-
-
+    }
 
 
+
+
+    /**
+     *  Ф-ція порівняння каналів
+     * @param ChannelID - ідентифікатор першого каналу
+     * @param ChannelID1 - ідентифікатор другого каналу
+     * @return - інформація про канали(назва, дата створення, ...
+     */
     public static void compareChannel (String ChannelID, String ChannelID1) throws ExecutionException, InterruptedException {
 
         executorService = Executors.newFixedThreadPool(2);
@@ -91,37 +107,43 @@ public class ForMapper {
 
     }
 
+    /**
+     *  Ф-ція для сортування каналів за заданим ключем
+     * @param ChannelID - масив ідентифікаторів каналів
+     * @param key - ключ для сортування
+     * @return - інформація про сортовані канали(назва, дата створення, ...
+     */
     public static void Sorting (String [] ChannelID, SortKey key) throws ExecutionException, InterruptedException {
 
-      ArrayList<SearchChannel> channels = new ArrayList<SearchChannel>();
+        ArrayList<SearchChannel> channels = new ArrayList<SearchChannel>();
         executorService = Executors.newFixedThreadPool(ChannelID.length);
 
         for(int j=0; j<ChannelID.length;j++) {
             Future<SearchChannel> future = executorService.submit(GetResponseChannel(ChannelID[j]));
-          channels.add(future.get());
-      }
-      executorService.shutdown();
+            channels.add(future.get());
+        }
+        executorService.shutdown();
 
-      switch (key) {
-          case NAME:
-              Collections.sort(channels, SearchChannel.NameComparator);
-              break;
-          case DATE:
-              Collections.sort(channels, SearchChannel.DateComparator);
-              break;
-          case SUBSCRIBERS:
-              Collections.sort(channels, SearchChannel.SubsComparator);
-              break;
-          case VIDEOS:
-              Collections.sort(channels, SearchChannel.VideosComparator);
-              break;
-          case VIEWS:
-              Collections.sort(channels, SearchChannel.ViewsComparator);
-              break;
-              default:
-                  System.out.println("Error !");
-                  return;
-      }
+        switch (key) {
+            case NAME:
+                Collections.sort(channels, SearchChannel.NameComparator);
+                break;
+            case DATE:
+                Collections.sort(channels, SearchChannel.DateComparator);
+                break;
+            case SUBSCRIBERS:
+                Collections.sort(channels, SearchChannel.SubsComparator);
+                break;
+            case VIDEOS:
+                Collections.sort(channels, SearchChannel.VideosComparator);
+                break;
+            case VIEWS:
+                Collections.sort(channels, SearchChannel.ViewsComparator);
+                break;
+            default:
+                System.out.println("Error !");
+                return;
+        }
 
         for(SearchChannel a : channels) {
             System.out.println("Название: " + a.items[0].snippet.title);
@@ -133,6 +155,12 @@ public class ForMapper {
         }
     }
 
+    /**
+     *  Ф-ція для повернення відео з каналу
+     * @param ChannelID - ідентифікатор каналу
+     * @param token - ідентифікатор сторінки з наступними відео
+     * @return - переліку відео
+     */
     public static Callable<SearchComment> GetResponseSearch (String ChannelID, String token)
     {
         Callable<SearchComment> response =() -> {
@@ -149,6 +177,11 @@ public class ForMapper {
     }
 
 
+    /**
+     *  Ф-ція для повернення коментарів з усіх відео на каналі
+     * @param ChannelID - ідентифікатор каналу
+     * @return - к-сть коментарів на каналі
+     */
     public static int GetCommentCount (String ChannelID) throws UnirestException, ExecutionException, InterruptedException {
 
         long start = System.currentTimeMillis()/1000;
@@ -179,6 +212,11 @@ public class ForMapper {
 
     }
 
+    /**
+     *  Ф-ція для повернення коментарів з однієї сторінки на каналі
+     * @param array - набір відео з однієї сторінки каналу
+     * @return - к-сть коментарів на одній сторінці каналу
+     */
     public static int GetCountComment(SearchComment array) throws ExecutionException, InterruptedException {
 
         executorService = Executors.newFixedThreadPool(10);
@@ -193,7 +231,11 @@ public class ForMapper {
         return totalCommentCount;
     }
 
-
+    /**
+     *  Ф-ція для повернення інформації про відео
+     * @param videoId - ідентифікатор відео
+     * @return - інформація про відео
+     */
     public static Callable<SearchCountComment> GetVideoComment(String videoId) {
 
         Callable<SearchCountComment> response =() -> {
@@ -208,7 +250,11 @@ public class ForMapper {
     }
 
 
-
+    /**
+     *  Ф-ція для виведення інформації з коментарями про канал по запиту
+     * @param ChannelID - ідентифікатор каналу
+     * @return - інформація про канал(назва, дата створення, ..., к-сть коментарів)
+     */
     public static void SearchChannelComment (String ChannelID) throws UnirestException, ExecutionException, InterruptedException {
         executorService = Executors.newFixedThreadPool(1);
         Future<SearchChannel> future = executorService.submit(GetResponseChannel(ChannelID));
@@ -226,6 +272,12 @@ public class ForMapper {
 
     }
 
+    /**
+     *  Ф-ція для виведення інформації з коментарями про канали по запиту
+     * @param ChannelID - ідентифікатор першого каналу
+     * @param ChannelID1 - ідентифікатор другого каналу
+     * @return - інформація про канали(назва, дата створення, ..., к-сть коментарів)
+     */
     public static void compareChannelComment (String ChannelID, String ChannelID1) throws UnirestException, ExecutionException, InterruptedException {
 
         executorService = Executors.newFixedThreadPool(2);
@@ -255,6 +307,11 @@ public class ForMapper {
     }
 
 
+    /**
+     *  Ф-ція для сортування каналів за к-стю коментарів
+     * @param ChannelID - масив ідентифікаторів каналів
+     * @return - інформація про сортовані канали(назва, дата створення, ...) за к-стю коментарів
+     */
     public static void SortingWithComment (String [] ChannelID) throws UnirestException, ExecutionException, InterruptedException {
 
         ArrayList<SearchChannel> channels = new ArrayList<SearchChannel>();
@@ -272,14 +329,14 @@ public class ForMapper {
 
         Collections.sort(channels, SearchChannel.CommentComparator);
 
-                for(SearchChannel a : channels) {
-                    System.out.println("Название: " + a.items[0].snippet.title);
-                    System.out.println("Дата создания: " + a.items[0].snippet.publishedAt);
-                    System.out.println("Количество подписчиков: " + a.items[0].statistics.subscriberCount);
-                    System.out.println("Количество видео: " + a.items[0].statistics.videoCount);
-                    System.out.println("Количество просмотров: " + a.items[0].statistics.viewCount);
-                    System.out.println("Количество комментариев: " + a.commentCount);
-                    System.out.println("------------------------------------");
+        for(SearchChannel a : channels) {
+            System.out.println("Название: " + a.items[0].snippet.title);
+            System.out.println("Дата создания: " + a.items[0].snippet.publishedAt);
+            System.out.println("Количество подписчиков: " + a.items[0].statistics.subscriberCount);
+            System.out.println("Количество видео: " + a.items[0].statistics.videoCount);
+            System.out.println("Количество просмотров: " + a.items[0].statistics.viewCount);
+            System.out.println("Количество комментариев: " + a.commentCount);
+            System.out.println("------------------------------------");
         }
     }
 }
