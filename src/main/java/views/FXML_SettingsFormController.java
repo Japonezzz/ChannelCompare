@@ -1,11 +1,11 @@
 package views;
 
+import com.alibaba.fastjson.JSON;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXButton;
@@ -46,7 +46,7 @@ public class FXML_SettingsFormController implements Initializable {
     private JFXButton btnSave;
 
     private File PathToCachFile;
-    Settings s;
+    Settings s = new Settings();
 
     @FXML
     void OnActionBtnSave(ActionEvent event) throws IOException {
@@ -56,6 +56,14 @@ public class FXML_SettingsFormController implements Initializable {
             PathToCachFile.createNewFile();
         }
         s = new Settings(chkCache.isSelected(), chkTime.isSelected(), PathToCachFile.getCanonicalPath());
+
+        String toFile = JSON.toJSONString(s);
+        File f = new File("resources/settings.txt");
+        FileWriter writer = new FileWriter(f.getName());
+        writer.write(toFile);
+        writer.flush();
+
+        OnActionToMainForm(event);
     }
 
     @FXML
@@ -66,15 +74,13 @@ public class FXML_SettingsFormController implements Initializable {
     @FXML
     void OnActionChkCache(ActionEvent event) {
         if(chkCache.isSelected()) {
-            GetCacheFile();
             txtField.setVisible(true);
             btnChange.setVisible(true);
             lbl.setVisible(true);
             return;
         }
-        txtField.setVisible(false);
-        btnChange.setVisible(false);
-        lbl.setVisible(false);
+
+        Visualization();
     }
 
     @FXML
@@ -98,14 +104,41 @@ public class FXML_SettingsFormController implements Initializable {
 
 
     public void initialize(URL location, ResourceBundle resources) {
+        File f = new File("resources/settings.txt");
+        try {
+            String jsonString = GetReadString(f);
+            s = JSON.parseObject(jsonString, Settings.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        PathToCachFile = new File(s.pathToFile);
+        chkCache.setSelected(s.useCache);
+        chkTime.setSelected(s.useTime);
+        txtField.setText(s.pathToFile);
+
+        Visualization();
+
         txtField.setDisable(true);
-        txtField.setVisible(false);
-        btnChange.setVisible(false);
-        lbl.setVisible(false);
     }
 
-    private void GetCacheFile() {
-        PathToCachFile = new File("resources/cache.txt");
-        txtField.setText(PathToCachFile.getAbsolutePath());
+    private String GetReadString(File f) throws IOException {
+        String read="";
+        FileReader reader = new FileReader(f.getName());
+        {
+            int c;
+            while((c=reader.read())!=-1){
+
+                read +=((char)c);
+            }
+        }
+        return read;
+    }
+
+    private void Visualization() {
+        if(!chkCache.isSelected()) {
+            txtField.setVisible(false);
+            btnChange.setVisible(false);
+            lbl.setVisible(false);
+        }
     }
 }
