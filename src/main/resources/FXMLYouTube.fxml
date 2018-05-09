@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="YouTubeAnalyzePane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.FXMLYouTubeController">
+   <children>
+      <SplitPane dividerPositions="0.3383458646616541" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="598.0" prefWidth="174.0">
+               <children>
+                  <JFXButton fx:id="btn_toYouTubeMainDialog" buttonType="RAISED" layoutX="14.0" layoutY="553.0" onAction="#showYouTubeMainDialog" style="-fx-background-color: white; -fx-border-color: black;" text="На головний екран" />
+                  <TableView layoutX="6.0" layoutY="124.0" prefHeight="369.0" prefWidth="254.0">
+                    <columns>
+                      <TableColumn prefWidth="253.0" text="Канал" />
+                    </columns>
+                  </TableView>
+                  <JFXTextField layoutX="65.0" layoutY="22.0" />
+                  <Label layoutX="6.0" layoutY="26.0" prefHeight="21.0" prefWidth="64.0" text="Пошук">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <JFXButton layoutX="52.0" layoutY="76.0" prefHeight="31.0" prefWidth="147.0" style="-fx-background-color: white; -fx-border-color: black;" text="Пошук" />
+                  <JFXButton buttonType="RAISED" layoutX="22.0" layoutY="510.0" style="-fx-border-color: black;" text="Видалити" />
+                  <JFXButton buttonType="RAISED" layoutX="155.0" layoutY="510.0" style="-fx-border-color: black;" text="Очистити" />
+               </children></AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TabPane prefHeight="598.0" prefWidth="564.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <tabs>
+                      <Tab text="Інформація">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <GridPane alignment="CENTER" layoutX="14.0" layoutY="85.0" prefHeight="300.0" prefWidth="504.0" style="-fx-grid-lines-visible: true;">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label alignment="TOP_LEFT" prefHeight="21.0" prefWidth="111.0" text="Назва канала">
+											 <GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="inf_1" alignment="CENTER" contentDisplay="CENTER" GridPane.columnIndex="1"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" text="Дата створення каналу" GridPane.rowIndex="1"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="inf_2" alignment="CENTER" contentDisplay="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" text="Підписників" GridPane.rowIndex="2"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="inf_3" alignment="CENTER" contentDisplay="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" text="Відео" GridPane.rowIndex="3"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="inf_4" alignment="CENTER" contentDisplay="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" text="Переглядів" GridPane.rowIndex="4"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="inf_5" alignment="CENTER" contentDisplay="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                       </children>
+                                    </GridPane>
+                                    <Label layoutX="14.0" layoutY="23.0" prefHeight="36.0" prefWidth="317.0" text="Інформація про канал">
+                                       <font>
+                                          <Font size="25.0" />
+                                       </font>
+                                    </Label>
+                                 </children></AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab text="Порівняти">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <GridPane layoutX="14.0" layoutY="101.0" prefHeight="360.0" prefWidth="496.0" style="-fx-grid-lines-visible: true;">
+                                      <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label text="Назва канала" GridPane.rowIndex="1"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label text="Дата створення" GridPane.rowIndex="2"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label text="Підписників" GridPane.rowIndex="3"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label text="Відео" GridPane.rowIndex="4"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label text="Переглядів" GridPane.rowIndex="5"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="comp_ch1_1" GridPane.columnIndex="1" GridPane.rowIndex="1"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="comp_ch2_1" GridPane.columnIndex="2" GridPane.rowIndex="1"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="comp_ch1_2" GridPane.columnIndex="1" GridPane.rowIndex="2"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="comp_ch2_2" GridPane.columnIndex="2" GridPane.rowIndex="2"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="comp_ch1_3" GridPane.columnIndex="1" GridPane.rowIndex="3"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="comp_ch2_3" GridPane.columnIndex="2" GridPane.rowIndex="3"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="comp_ch1_4" GridPane.columnIndex="1" GridPane.rowIndex="4"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="comp_ch2_4" GridPane.columnIndex="2" GridPane.rowIndex="4"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="comp_ch1_5" GridPane.columnIndex="1" GridPane.rowIndex="5"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="comp_ch2_5" GridPane.columnIndex="2" GridPane.rowIndex="5"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <JFXButton fx:id="btn_comp_ch1" buttonType="RAISED" style="-fx-background-color: white; -fx-border-color: black;" text="Вибрати" GridPane.columnIndex="1" />
+                                          <JFXButton fx:id="btn_comp_ch2" buttonType="RAISED" style="-fx-background-color: white; -fx-border-color: black;" text="Вибрати" GridPane.columnIndex="2" />
+                                       </children>
+                                    </GridPane>
+                                    <Label layoutX="14.0" layoutY="14.0" text="Порівняти інформцію про канали">
+                                       <font>
+                                          <Font size="25.0" />
+                                       </font>
+                                    </Label>
+                                 </children></AnchorPane>
+                        </content>
+                      </Tab>
+                        <Tab text="Сортувати за данними">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView layoutX="14.0" layoutY="50.0" prefHeight="500.0" prefWidth="500.0">
+                                      <columns>
+                                        <TableColumn prefWidth="100.0" text="Назва" />
+                                        <TableColumn prefWidth="100.0" text="Дата створення" />
+                                          <TableColumn prefWidth="100.0" text="Підписників" />
+                                          <TableColumn prefWidth="100.0" text="Відео" />
+                                          <TableColumn prefWidth="100.0" text="Переглядів" />
+                                      </columns>
+                                    </TableView>
+                                    <Label layoutX="14.0" layoutY="14.0" text="Сортувати канали по їх данним">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children></AnchorPane>
+                            </content>
+                        </Tab> 
+                        <Tab text="Медіа резонанс">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <GridPane alignment="CENTER" layoutX="14.0" layoutY="85.0" prefHeight="360.0" prefWidth="504.0" style="-fx-grid-lines-visible: true;">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label alignment="TOP_LEFT" prefHeight="21.0" prefWidth="111.0" text="Назва канала">
+											 <GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="med_res_inf_1" alignment="CENTER" contentDisplay="CENTER" GridPane.columnIndex="1"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" text="Дата створення каналу" GridPane.rowIndex="1"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="med_res_inf_2" alignment="CENTER" contentDisplay="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" text="Підписників" GridPane.rowIndex="2"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="med_res_inf_3" alignment="CENTER" contentDisplay="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" text="Відео" GridPane.rowIndex="3"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="med_res_inf_4" alignment="CENTER" contentDisplay="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" text="Переглядів" GridPane.rowIndex="4"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="med_res_inf_5" alignment="CENTER" contentDisplay="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label text="Кількість коментарів" GridPane.rowIndex="5" />
+                                          <Label fx:id="med_res_inf_6" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                       </children>
+                                    </GridPane>
+                                    <Label layoutX="14.0" layoutY="14.0" text="Знайти сумму всіх коментар під відео">
+                                       <font>
+                                          <Font size="25.0" />
+                                       </font>
+                                    </Label>
+                                 </children></AnchorPane>
+                          </content>
+                        </Tab>
+						<Tab text="Порівняти медіа резонанс">
+                          <content>
+                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <GridPane layoutX="14.0" layoutY="101.0" prefHeight="420.0" prefWidth="496.0" style="-fx-grid-lines-visible: true;">
+                                      <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label text="Назва канала" GridPane.rowIndex="1"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label text="Дата створення" GridPane.rowIndex="2"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label text="Підписників" GridPane.rowIndex="3"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label text="Відео" GridPane.rowIndex="4"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label text="Переглядів" GridPane.rowIndex="5"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="comp_med_res_ch1_1" GridPane.columnIndex="1" GridPane.rowIndex="1"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="comp_med_res_ch2_1" GridPane.columnIndex="2" GridPane.rowIndex="1"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="comp_med_res_ch1_2" GridPane.columnIndex="1" GridPane.rowIndex="2"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="comp_med_res_ch2_2" GridPane.columnIndex="2" GridPane.rowIndex="2"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="comp_med_res_ch1_3" GridPane.columnIndex="1" GridPane.rowIndex="3"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="comp_med_res_ch2_3" GridPane.columnIndex="2" GridPane.rowIndex="3"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="comp_med_res_ch1_4" GridPane.columnIndex="1" GridPane.rowIndex="4"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="comp_med_res_ch2_4" GridPane.columnIndex="2" GridPane.rowIndex="4"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="comp_med_res_ch1_5" GridPane.columnIndex="1" GridPane.rowIndex="5"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <Label fx:id="comp_med_res_ch2_5" GridPane.columnIndex="2" GridPane.rowIndex="5"><GridPane.margin>
+                                                <Insets left="5.0" />
+                                             </GridPane.margin>
+										  </Label>
+                                          <JFXButton fx:id="btn_comp_ch1" buttonType="RAISED" style="-fx-background-color: white; -fx-border-color: black;" text="Вибрати" GridPane.columnIndex="1" />
+                                          <JFXButton fx:id="btn_comp_ch2" buttonType="RAISED" style="-fx-background-color: white; -fx-border-color: black;" text="Вибрати" GridPane.columnIndex="2" />
+                                          <Label text="Коментарів" GridPane.rowIndex="6" />
+                                          <Label fx:id="comp_med_res_ch1_6" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                          <Label fx:id="comp_med_res_ch2_6" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                       </children>
+                                    </GridPane>
+                                    <Label layoutX="14.0" layoutY="14.0" text="Порівняти інформцію про канали">
+                                       <font>
+                                          <Font size="25.0" />
+                                       </font>
+                                    </Label>
+                                 </children></AnchorPane>
+                          </content>
+                        </Tab>
+						<Tab text="Сортувати по медіа резонансу">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView layoutX="14.0" layoutY="60.0" prefHeight="480.0" prefWidth="500.0">
+                                      <columns>
+                                        <TableColumn prefWidth="83.0" text="Назва" />
+                                        <TableColumn prefWidth="83.0" text="Дата створення" />
+                                          <TableColumn prefWidth="83.0" text="Підписників" />
+                                          <TableColumn prefWidth="83.0" text="Відео" />
+                                          <TableColumn prefWidth="83.0" text="Переглядів" />
+                                          <TableColumn prefWidth="83.0" text="Коментарів" />
+                                      </columns>
+                                    </TableView>
+                                    <Label layoutX="14.0" layoutY="14.0" text="Сортувати  по медіа резонансу">
+                                       <font>
+                                          <Font size="25.0" />
+                                       </font>
+                                    </Label>
+                                 </children></AnchorPane>
+                          </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
