@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="248.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.FXML_SettingsFormController">
+   <children>
+      <JFXButton fx:id="btnToMainForm" buttonType="RAISED" layoutX="14.0" layoutY="14.0" onAction="#OnActionToMainForm" ripplerFill="#a16b6b" text="Назад" textOverrun="CLIP">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <JFXCheckBox fx:id="chkCache" layoutX="14.0" layoutY="80.0" onAction="#OnActionChkCache" text="Використовувати кеш">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXTextField fx:id="txtField" layoutX="14.0" layoutY="152.0" maxWidth="475.0" minWidth="298.0" prefHeight="31.0" prefWidth="475.0" />
+      <JFXButton fx:id="btnChange" layoutX="502.0" layoutY="155.0" onAction="#OnActionBtnChange" text="Змінити">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <Label fx:id="lbl" layoutX="21.0" layoutY="124.0" text="Шлях до файла кешу:" />
+      <JFXCheckBox fx:id="chkTime" layoutX="14.0" layoutY="199.0" onAction="#OnActionChkTime" text="Показати час">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </JFXCheckBox>
+   </children>
+</AnchorPane>
