@@ -1,1 +1,1 @@
-{"pathToFile":"E:\\test.txt","useCache":true,"useTime":false}
+{"pathToFile":"resources\\settings.txt","useCache":false,"useTime":false}

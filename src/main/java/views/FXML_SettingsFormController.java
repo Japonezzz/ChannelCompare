@@ -55,7 +55,7 @@ public class FXML_SettingsFormController implements Initializable {
             PathToCachFile = localCache;
             PathToCachFile.createNewFile();
         }
-        s = new Settings(chkCache.isSelected(), chkTime.isSelected(), PathToCachFile.getCanonicalPath());
+        s = new Settings(chkCache.isSelected(), chkTime.isSelected(), PathToCachFile.getPath());
 
         String toFile = JSON.toJSONString(s);
         File f = new File("resources/settings.txt");
